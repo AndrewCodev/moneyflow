@@ -3,12 +3,21 @@ package com.drewcode.moneyflow.entity;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "transaction")
 public class Transaction {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private BigDecimal amount;
     private LocalDateTime date;
     private String description;
+
+    @Enumerated(EnumType.STRING)
     private TransactionType type;
 
     public Transaction() {
