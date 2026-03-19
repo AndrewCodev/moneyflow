@@ -24,4 +24,17 @@ public class TransactionService {
         return repository.findAll();
     }
 
+    public Transaction update(Transaction transaction) {
+        return repository.getReferenceById(transaction.getId());
+    }
+
+    public Transaction findById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Transaction not found"));
+    }
+
+    public void deleteById(Long id) {
+        repository.deleteById(id);
+    }
+
 }
