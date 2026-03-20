@@ -2,6 +2,7 @@ package com.drewcode.moneyflow.controller;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,6 +38,7 @@ public class TransactionController {
     @PutMapping("/{id}")
     public Transaction update(@PathVariable Long id, @RequestBody Transaction transaction) {
         // Trae la transacción existente
+
         Transaction existing = service.findById(id);
 
         // Actualiza solo los campos que quieras
@@ -47,10 +49,12 @@ public class TransactionController {
 
         // Guarda
         return service.save(existing);
+
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.deleteById(id);
+        return ResponseEntity.noContent().build(); // 204 cuando se borra correctamente
     }
 }
